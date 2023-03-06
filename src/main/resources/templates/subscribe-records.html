@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title>Home</title>
+<link rel="stylesheet" href="#" th:href="@{/css/bootstrap.css}" />
+<link rel="stylesheet" href="#" th:href="@{/css/all.css}" />
+<link rel="stylesheet" href="#" th:href="@{/css/index.css}" />
+</head>
+<body>
+
+	<div class="container base">
+		<div class="row base-row">
+			<div class="col-3 menu">
+			<div class="logo mb-5 text-center text-light bg-dark pt-1 pb-1">
+			<h4>Autocar Réservation</h4>
+			</div>
+				<ul class="list">
+					<li><a th:href="@{/home}"><i class="fas fa-home"></i>&nbsp;&nbsp;Home</a></li>
+					<li><a th:href="@{/setting}"><i class="fas fa-cogs"></i>&nbsp;&nbsp;Setting</a></li>
+					<li><a th:href="@{/home}"><i class="fas fa-cogs"></i>&nbsp;&nbsp;Trajets</a></li>
+					<li><a th:href="@{/societies}"><i class="fas fa-cogs"></i>&nbsp;&nbsp;Sociétés</a></li>
+					<li><a th:href="@{/bus}"><i class="fas fa-cogs"></i>&nbsp;&nbsp;Autocars</a></li>
+					<li th:if="${session.role == 'ADMIN'}"><a th:href="@{/all-customers-records}"><i class="fas fa-users"></i>&nbsp;&nbsp;Utilisateurs</a></li>
+					<li th:if="${session.role == 'ADMIN'}"><a th:href="@{/all-subs}"><i
+							class="fas fa-history"></i>&nbsp;&nbsp;Abonnements</a></li>
+					<li th:if="${session.role != 'ADMIN'}"><a th:href="@{/my-subs}"><i
+							class="fas fa-history"></i>&nbsp;&nbsp;Mes Abonnements</a></li>
+					<li><a th:href="@{/logout}"><i class="fas fa-sign-out-alt"></i>&nbsp;&nbsp;Logout</a></li>
+				</ul>
+			</div>
+			<div class="col-9 history">
+				<div class="history-section">
+					<div class="history-head">
+						<p>
+							<span><i class="fas fa-user"></i></span>&nbsp;<span
+								class="name-user" th:if="${session.user.name}"
+								th:text="${session.user.name}"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						</p>
+					</div>
+
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<th scope="col" class="text-primary">Départ</th>
+								<th scope="col" class="text-primary">Arivée</th>
+								<th scope="col" class="text-primary">Date de départ</th>
+								<th scope="col" class="text-primary">Date de fin</th>
+								<th scope="col" class="text-primary">Prix</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="history: ${subscribes}">
+								<th th:text="${history.trajet.depart}"></th>
+								<th th:text="${history.trajet.arrive}"></th>
+								<th th:text="${history.getDateDepart()}"></th>
+								<th th:text="${history.getDateFin()}"></th>
+								<th th:text="${history.getPrix()}"></th>
+							</tr>
+
+
+						</tbody>
+					</table>
+
+
+
+				</div>
+			</div>
+		</div>
+
+	</div>
+</body>
+</html>

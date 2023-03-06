@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title>Home</title>
+<link rel="stylesheet" href="#" th:href="@{/css/bootstrap.css}" />
+<link rel="stylesheet" href="#" th:href="@{/css/all.css}" />
+<link rel="stylesheet" href="#" th:href="@{/css/index.css}" />
+</head>
+<body>
+
+	<div class="container base">
+		<div class="row base-row">
+			<div class="col-3 menu">
+			<div class="logo mb-5 text-center text-light bg-dark pt-1 pb-1">
+			<h4>Autocar Réservation</h4>
+			</div>
+				<ul class="list">
+					<li><a th:href="@{/}"><i class="fas fa-home"></i>&nbsp;&nbsp;Home</a></li>
+					<li><a th:classappend="${menu == 'register'} ? 'text-dark' : ' '" th:href="@{/register}"><i class="fas fa-user-plus"></i>&nbsp;&nbsp;Register</a></li>
+					<li><a th:href="@{/loginForm}"><i class="fas fa-users"></i>&nbsp;&nbsp;Login</a></li>
+
+				</ul>
+			</div>
+			<div class="col-9 register-form">
+				<div class="login">
+					<form action="save" method="post">
+					<div class="login-head">
+						<h3>Register</h3>
+						</div>
+						<div class="form-group">
+							<label for="exampleInputName">Nom</label> <input type="text"
+								class="form-control" id="exampleInputName"
+								placeholder="Entrer non" name="name">
+
+						</div>
+
+						<div class="form-group">
+							<label for="exampleInputprenom">Prénom</label> <input type="text"
+								 class="form-control" id="exampleInputprenom"
+								 placeholder="Entrer prénom" name="prenom">
+
+						</div>
+
+						<div class="form-group">
+							<label for="exampleInputEmail1">Adresse Email</label> <input
+								type="email" class="form-control" id="exampleInputEmail1"
+								name="email" placeholder="Entrer email">
+
+						</div>
+
+						<div class="form-group">
+							<label for="exampleInputPassword1">Mot de passe</label> <input
+								type="password" class="form-control" id="exampleInputPassword1"
+								placeholder="Password" name="password">
+						</div>
+
+						<div class="form-group">
+							<label for="inputCin">CIN</label> <input
+								type="text" class="form-control" id="inputCin"
+								placeholder="CIN" name="cin">
+						</div>
+
+						<div class="form-group">
+							<label for="inputAdresse">Adresse</label> <input
+								type="text" class="form-control" id="inputAdresse"
+								placeholder="Adresse" name="adresse">
+						</div>
+
+						<div class="form-group">
+							<label for="inputPhone">Téléphone</label> <input
+								type="text" class="form-control" id="inputPhone"
+								placeholder="Téléphone" name="phone">
+						</div>
+
+						<div class="form-group">
+							<input
+								type="hidden" class="form-control" name="role" value="CUSTOMER">
+						</div>
+
+						<button type="submit" class="btn btn-primary">Submit</button>
+					</form>
+					<div class="login-register">
+						<p>
+							Already register <span><a th:href="@{/loginForm}">click here</a></span>
+						</p>
+					</div>
+				</div>
+
+
+			</div>
+		</div>
+
+	</div>
+</body>
+</html>

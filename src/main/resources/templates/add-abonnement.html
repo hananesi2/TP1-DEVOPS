@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Home</title>
+    <link rel="stylesheet" href="#" th:href="@{/css/bootstrap.css}" />
+    <link rel="stylesheet" href="#" th:href="@{/css/all.css}" />
+    <link rel="stylesheet" href="#" th:href="@{/css/index.css}" />
+</head>
+<body>
+
+<div class="container base">
+    <div class="row base-row">
+        <div class="col-3 menu">
+            <div class="logo mb-5 text-center text-light bg-dark pt-1 pb-1">
+                <h4>Autocar Réservation</h4>
+            </div>
+            <ul class="list">
+                <li><a th:href="@{/home}"><i class="fas fa-home"></i>&nbsp;&nbsp;Home</a></li>
+                <li><a th:href="@{/setting}"><i class="fas fa-cogs"></i>&nbsp;&nbsp;Setting</a></li>
+                <li><a th:href="@{/home}"><i class="fas fa-cogs"></i>&nbsp;&nbsp;Trajets</a></li>
+                <li><a th:href="@{/societies}"><i class="fas fa-cogs"></i>&nbsp;&nbsp;Sociétés</a></li>
+                <li><a th:href="@{/bus}"><i class="fas fa-cogs"></i>&nbsp;&nbsp;Autocars</a></li>
+                <li th:if="${session.role == 'ADMIN'}"><a th:classappend="${menu == 'allusers'} ? 'text-dark' : ' '" th:href="@{/all-customers-records}"><i class="fas fa-users"></i>&nbsp;&nbsp;Utilisateurs</a></li>
+                <li th:if="${session.role == 'ADMIN'}"><a th:href="@{/all-subs}"><i class="fas fa-history"></i>&nbsp;&nbsp;Abonnements</a></li>
+                <li th:if="${session.role != 'ADMIN'}"><a th:href="@{/my-subs}"><i
+                        class="fas fa-history"></i>&nbsp;&nbsp;Mes Abonnements</a></li>
+                <li><a th:href="@{/logout}"><i class="fas fa-sign-out-alt"></i>&nbsp;&nbsp;Logout</a></li>
+            </ul>
+        </div>
+        <div class="col-9 history">
+            <div class="history-section">
+                <div class="history-head">
+                    <p>
+                        <span><i class="fas fa-user"></i></span>&nbsp;<span
+                            class="name-user" th:if="${session.user.name}"
+                            th:text="${session.user.name}"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    </p>
+                </div>
+                <h2>Trajet : </h2>
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Départ</th>
+                        <th scope="col">Arrivée</th>
+                        <th scope="col">Date début</th>
+                        <th scope="col">Date de fin</th>
+                        <th scope="col">prix</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <th th:text="${trajet.id}"></th>
+                        <th th:text="${trajet.depart}"></th>
+                        <th th:text="${trajet.arrive}"></th>
+                        <th th:text="${trajet.dateDebut}"></th>
+                        <th th:text="${trajet.dateFin}"></th>
+                        <th th:text="${trajet.prix}"></th>
+                    </tr>
+
+
+                    </tbody>
+                </table>
+                <div class="setting-details">
+                    <form th:action="@{/subscribe/new}" method="post">
+                        <table class="table table-borderless">
+                            <tbody>
+                            <tr>
+                                <th>Date début</th>
+                                <td >
+                                    <div class="form-group">
+                                        <label for="dateDebut">Date début</label> <input
+                                            type="date" class="form-control" id="dateDebut" placeholder="Date début"
+                                            name="dateDebut">
+
+                                    </div>
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <th>Date de fin</th>
+                                <td >
+                                    <div class="form-group">
+                                    <label for="dateFin">Date de fin</label> <input
+                                        type="date" class="form-control" id="dateFin" placeholder="Date fin"
+                                        name="dateFin">
+                                    </div>
+                                </td>
+                                <input type="hidden" name="trajetId" th:value="${trajet.id}"/>
+                            </tr>
+                        </table>
+                        <div class="btn5 text-center">
+                            <button class="btn btn-primary" type="submit">Créer</button>
+                        </div>
+
+
+                    </form>
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

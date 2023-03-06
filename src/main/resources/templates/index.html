@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title>Home</title>
+<link rel="stylesheet" href="#" th:href="@{/css/bootstrap.css}" />
+<link rel="stylesheet" href="#" th:href="@{/css/all.css}" />
+<link rel="stylesheet" href="#" th:href="@{/css/index.css}" />
+</head>
+<body>
+
+	<div class="container base">
+		<div class="row base-row">
+			<div class="col-3 menu">
+			<div class="logo mb-5 text-center text-light bg-dark pt-1 pb-1">
+			<h4>Autocar Réservation</h4>
+			</div>
+				<ul class="list">
+					<li><a th:classappend="${menu == 'home'} ? 'text-dark' : ' '" th:href="@{/}"><i class="fas fa-home"></i>&nbsp;&nbsp;Home</a></li>
+					<li><a th:href="@{/register}"><i class="fas fa-user-plus"></i>&nbsp;&nbsp;Register</a></li>
+					<li><a th:href="@{/loginForm}"><i class="fas fa-users"></i>&nbsp;&nbsp;Login</a></li>
+				</ul>
+			</div>
+			<div class="col-9 before_login_home">
+				<div class="before_head">
+					<form action="">
+						<input type="text" placeholder="Chercher des offres..," />
+						<button>
+							<i class="fa fa-search"></i>
+						</button>
+
+					</form>
+
+
+				</div>
+				<table class="table table-striped">
+					<thead>
+					<tr>
+						<th scope="col">#</th>
+						<th scope="col">Départ</th>
+						<th scope="col">Arrivée</th>
+						<th scope="col">Date Début</th>
+						<th scope="col">Date Fin</th>
+						<th scope="col">Prix</th>
+						<th scope="col">Action</th>
+					</tr>
+					</thead>
+					<tbody>
+					<tr th:each="trajet: ${listTrajets}">
+						<th th:text="${trajet.id}"></th>
+						<th th:text="${trajet.depart}"></th>
+						<th th:text="${trajet.arrive}"></th>
+						<th th:text="${trajet.dateDebut}"></th>
+						<th th:text="${trajet.dateFin}"></th>
+						<th th:text="${trajet.prix}"></th>
+						<th>
+							<a th:href="@{subscribe/{id}(id=${trajet.id})}">Abonner</a>
+						</th>
+
+					</tr>
+
+
+					</tbody>
+				</table>
+
+
+			</div>
+		</div>
+
+	</div>
+</body>
+</html>
