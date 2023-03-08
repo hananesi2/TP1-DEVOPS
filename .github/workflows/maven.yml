@@ -37,12 +37,27 @@ jobs:
       run: mvn clean install
 
     #validate the quality of the code using pmd
+    #- name: Run PMD
+      #uses: pmd/pmd-action@v2.0.0
+      #with:
+        #version: '6.36.0'
+        #target-directory: src/main/java
+        #rule-sets: java-basic,java-design
+
+
+    - name: Install PMD
+      run:  | 
+         wget https://github.com/pmd/pmd/releases/download/pmd_releases%2F6.41.0/pmd-bin-6.41.0.zip 
+         unzip pmd-bin-6.41.0.zip
+      working-directory: ${{ github.workspace }}
     - name: Run PMD
-      uses: pmd/pmd-action@v2.0.0
-      with:
-        version: '6.36.0'
-        target-directory: src/main/java
-        rule-sets: java-basic,java-design
+        run:|
+          ./pmd-bin-6.41.0/bin/run.sh pmd \
+            -d src \
+            -R ruleset.xml \
+            -f html \
+            -r report.html
+      working-directory: ${{ github.workspace }}
 
 
     - name: Run tests
