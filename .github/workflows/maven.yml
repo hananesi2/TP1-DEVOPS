@@ -33,8 +33,7 @@ jobs:
     - name: Build with Maven
       run: mvn -B package --file pom.xml
 
-    - name: Install dependencies
-      run: mvn clean install
+
 
     #validate the quality of the code using pmd
     #- name: Run PMD
@@ -45,27 +44,14 @@ jobs:
         #rule-sets: java-basic,java-design
 
 
-    - name: Install PMD
-      run:  | 
-         wget https://github.com/pmd/pmd/releases/download/pmd_releases%2F6.41.0/pmd-bin-6.41.0.zip 
-         unzip pmd-bin-6.41.0.zip
-      working-directory: ${{ github.workspace }}
-    - name: Run PMD
-        run:|
-          ./pmd-bin-6.41.0/bin/run.sh pmd \
-            -d src \
-            -R ruleset.xml \
-            -f html \
-            -r report.html
-      working-directory: ${{ github.workspace }}
+
+
 
 
     - name: Run tests
       run: mvn test
 
-    #execute tests using junit
-    - name: Test with JUnit
-      run: mvn test --file pom.xml
+
 
     # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
     - name: Update dependency graph
